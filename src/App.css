@@ -1,0 +1,108 @@
+* {
+  font-family: 'Poppins', sans-serif;
+  
+  
+}
+
+.App {
+  width: 100%;
+  max-width: 1200px;
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+}
+
+.header {
+  display: flex;
+  flex-direction: column;
+}
+
+.banner {
+  display: flex;
+  height: 100%;
+  min-height: 350px;
+  width: 100%;
+  align-items: center;
+  justify-content: space-around;
+  background-image: url(../public/img/pruebaBanner3.jpg);
+  background-size:cover;
+  background-position: bottom;
+  
+}
+
+.bannerComandos {
+  display: flex;
+  justify-content: end;
+  margin-left: 5px;
+  gap: 10px;
+  height: 100%;
+  width: 100%;
+  border-radius: 5px;
+  margin-right: 10px;
+}
+
+.Comandos__button{
+  display: flex;
+  background-color: #4a4a4a;
+  color: #ffffff;
+  border: none;
+  border-radius: 5px;
+  margin-right: 10px;
+  padding: 10px 20px;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.15);
+  transition: all 0.3s ease;
+}
+
+.Comandos__button:hover {
+  background-color: #3a3a3a;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.25);
+}
+
+.Comandos__button:active {
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+  transform: scale(0.98);
+}
+
+
+.nav {
+  
+  display: flex;
+  width: 100%;
+  justify-content: space-around;
+  background-color: #f5f5f5;
+}
+
+.nav-item{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 10px 20px;
+  color: #4a4a4a;
+  text-decoration: none;
+  transition: all 0.5s ease;
+}
+
+.nav-item:hover {
+  background-color: #aca9a9;
+  color: #ffffff;
+}
+
+.navbar-nav{
+  display: flex;
+  justify-content: space-around;
+  width: 100%;
+  align-items: start;
+  
+}
+
+.carousel-item img{
+  width: 100%;
+  height: 400px;
+  object-fit: cover;
+}
+
+
+.card{
+  height: 200px;
+}
+
