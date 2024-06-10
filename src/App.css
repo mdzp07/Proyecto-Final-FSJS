@@ -1,7 +1,5 @@
 * {
   font-family: 'Poppins', sans-serif;
-  
-  
 }
 
 .App {
@@ -102,7 +100,73 @@
 }
 
 
-.card{
-  height: 200px;
+.product-title{
+  font-size: 1.5rem;
+  font-weight: 600;
+  margin: 10px 0;
+  height: 40px;
 }
 
+.card {
+  display: flex;
+  flex-direction: column;
+  border-radius: 5px;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.15);
+  transition: all 0.3s ease;
+}
+
+
+.card-img-top{
+  width: 100%;
+  height: 300px;
+  
+  border-radius: 5px;
+}
+
+.card-title{
+  font-size: 1.5rem;
+  font-weight: 600;
+  margin: 10px 0;
+  height: 40px;
+  font-size: 15px;
+}
+
+.card-text{
+  font-size: 14px;
+  color: #4a4a4a;
+}
+
+.cajaBoton{
+  display: flex;
+  width: 100%;
+  justify-content: space-around;
+  margin-top: 10px;
+}
+
+
+.cajaBoton:hover {
+  background-color: #aca9a9;
+  color: #000000;
+  transition: all 0.5s ease;
+
+}
+
+.card-carro{
+  display: flex;
+  justify-content: space-around;
+  align-items: start;
+  padding: 10px 20px;
+  color: #4a4a4a;
+  text-decoration: none;
+  transition: all 0.5s ease;
+}
+
+.card-carro-img{
+  width: 100%;
+  height: 300px;
+  border-radius: 5px; 
+}
+
+.card-carro-comandos{
+display: flex;
+}

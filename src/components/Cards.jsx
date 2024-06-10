@@ -4,7 +4,7 @@ import { Context } from '../context/Context';
 const Cards = () => {
 
     //Context
-    const {car, setCar} = useContext(Context);
+    const { car, setCar } = useContext(Context);
 
     // Estado para almacenar los datos de la API
     const [data, setData] = useState([]);
@@ -19,10 +19,10 @@ const Cards = () => {
             console.error('Error fetching data:', error);
         }
     };
-    
-    const add = (i, x)=>{
+
+    const add = (i, x) => {
         setCar((currentProduct) => [...currentProduct, i]);
-      }
+    }
 
 
     useEffect(() => {
@@ -31,24 +31,26 @@ const Cards = () => {
 
     return (
         <div className="container">
-            <h1>Cards</h1>
+            <h1 className='product-title'>Productos</h1>
             <div className="row">
                 {data.map((item, index) => (
-                    <div key={index} className="col-md-4">
+                    <div key={index} className="col-md-3">
                         {/* Renderizar los datos en tarjetas */}
                         <div className="card mb-3">
                             <img src={item.image} className="card-img-top" alt={item.title} />
                             <div className="card-body">
-                                <h5 className="card-title">{item.title}</h5>
-                                <p className="card-text">{item.description}</p>
+                                <h5 className="card-title">{item.title.substring(0, 15)}</h5>
+                                <p className="card-text">{item.description.substring(0, 50)}</p>
                                 <p className='card-text'>$ {item.price}</p>
                                 {/* Agrega más campos según la estructura de tus datos */}
+                                <div className=''>
+                                    <button className='cajaBoton' onClick={() => add(item, index)}>
+                                        <i class="bi bi-cart carro"></i>
+                                        <text className='add'>Añadir al carrito</text> 
+                                    </button>
+                                </div>
                             </div>
-                            <div>
-                                <button  onClick={() => add(item, index)}>
-                                    Añadir al carrito
-                                </button>
-                            </div>
+
                         </div>
                     </div>
                 ))}
