@@ -8,7 +8,7 @@ const ModificarUsuario = ({ usuario, setModoEditar }) => {
   const [direccion, setDireccion] = useState(usuario.direccion);
   const [telefono, setTelefono] = useState(usuario.telefono);
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
     const usuarioModificado = {
       ...usuario,
@@ -17,6 +17,15 @@ const ModificarUsuario = ({ usuario, setModoEditar }) => {
       direccion,
       telefono
     };
+
+    await fetch(`http://localhost:3000/api/usuarios/${usuario.id_usuario}`, {
+      method: 'PUT',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify(usuarioModificado),
+    });
+
     setUsuarios(usuarios.map(u => u.id_usuario === usuario.id_usuario ? usuarioModificado : u));
     setModoEditar(false);
   };

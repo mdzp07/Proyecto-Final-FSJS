@@ -7,7 +7,6 @@ import Registrar from './views/Registrar';
 import Login from './views/Login';
 import Perfil from './views/Perfil';
 import Compra from './views/Compra';
-import SubirProducto from './views/SubirProducto';
 import Administrador from './components/AdminComponents/Administrador';
 import { StoreProvider } from './context/ContextAdm';
 import ContextProvider from './context/Context';
