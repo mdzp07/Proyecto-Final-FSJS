@@ -2,7 +2,7 @@ import express from 'express';
 import cors from 'cors';
 import dotenv from 'dotenv';
 import {
-    getProductos, getProductoById, createProducto, updateProducto, deleteProducto,
+    // getProductos, getProductoById, createProducto, updateProducto, deleteProducto,
     getUsuarios, getUsuarioById, createUsuario, updateUsuario, deleteUsuario
 } from './consultas.js';
 
@@ -22,52 +22,52 @@ app.get('/', (req, res) => {
 });
 
 // Rutas para productos
-app.get('/api/productos', async (req, res) => {
-    try {
-        const productos = await getProductos();
-        res.json(productos);
-    } catch (err) {
-        res.status(500).send(err.message);
-    }
-});
+// app.get('/api/productos', async (req, res) => {
+//     try {
+//         const productos = await getProductos();
+//         res.json(productos);
+//     } catch (err) {
+//         res.status(500).send(err.message);
+//     }
+// });
 
-app.get('/api/productos/:id', async (req, res) => {
-    try {
-        const producto = await getProductoById(req.params.id);
-        res.json(producto);
-    } catch (err) {
-        res.status(500).send(err.message);
-    }
-});
+// app.get('/api/productos/:id', async (req, res) => {
+//     try {
+//         const producto = await getProductoById(req.params.id);
+//         res.json(producto);
+//     } catch (err) {
+//         res.status(500).send(err.message);
+//     }
+// });
 
-app.post('/api/productos', async (req, res) => {
-    try {
-        const { nombre, descripcion, precio, imagen, stock } = req.body;
-        const newProducto = await createProducto(nombre, descripcion, precio, imagen, stock);
-        res.json(newProducto);
-    } catch (err) {
-        res.status(500).send(err.message);
-    }
-});
+// app.post('/api/productos', async (req, res) => {
+//     try {
+//         const { nombre, descripcion, precio, imagen, stock } = req.body;
+//         const newProducto = await createProducto(nombre, descripcion, precio, imagen, stock);
+//         res.json(newProducto);
+//     } catch (err) {
+//         res.status(500).send(err.message);
+//     }
+// });
 
-app.put('/api/productos/:id', async (req, res) => {
-    try {
-        const { nombre, descripcion, precio, imagen, stock } = req.body;
-        const updatedProducto = await updateProducto(req.params.id, nombre, descripcion, precio, imagen, stock);
-        res.json(updatedProducto);
-    } catch (err) {
-        res.status(500).send(err.message);
-    }
-});
+// app.put('/api/productos/:id', async (req, res) => {
+//     try {
+//         const { nombre, descripcion, precio, imagen, stock } = req.body;
+//         const updatedProducto = await updateProducto(req.params.id, nombre, descripcion, precio, imagen, stock);
+//         res.json(updatedProducto);
+//     } catch (err) {
+//         res.status(500).send(err.message);
+//     }
+// });
 
-app.delete('/api/productos/:id', async (req, res) => {
-    try {
-        await deleteProducto(req.params.id);
-        res.status(204).send();
-    } catch (err) {
-        res.status(500).send(err.message);
-    }
-});
+// app.delete('/api/productos/:id', async (req, res) => {
+//     try {
+//         await deleteProducto(req.params.id);
+//         res.status(204).send();
+//     } catch (err) {
+//         res.status(500).send(err.message);
+//     }
+// });
 
 // Rutas para usuarios
 app.get('/api/usuarios', async (req, res) => {
