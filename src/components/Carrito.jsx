@@ -65,7 +65,7 @@ const Carrito = () => {
 
   return (
     <>
-      {car.length == 0 ? (<div><p>¡Ops! Esto parece estar vacío</p></div>) : (<section>
+      {car.length == 0 ? (<div className='mensaje-carro-vacio'><p>¡Ops! Esto parece estar vacío</p></div>) : (<section>
         <p>Detalle del pedido:</p>
         {render.map((i, x) => (
           <div className='card-carro' key={i.title}>
