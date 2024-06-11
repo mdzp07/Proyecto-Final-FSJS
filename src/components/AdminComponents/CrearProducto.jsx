@@ -10,17 +10,33 @@ const CrearProducto = () => {
   const [stock, setStock] = useState('');
   const [imagen, setImagen] = useState('');
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
     const nuevoProducto = {
-      id: productos.length + 1,
       nombre,
       descripcion,
       precio,
       stock,
       imagen
     };
-    setProductos([...productos, nuevoProducto]);
+    try {
+      const response = await fetch('http://localhost:3000/api/productos', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(nuevoProducto),
+      });
+      if (response.ok) {
+        const data = await response.json();
+        setProductos([...productos, data]);
+        console.log('Producto creado:', data);
+      } else {
+        console.error('Error al crear producto');
+      }
+    } catch (error) {
+      console.error('Error:', error);
+    }
   };
 
   return (
