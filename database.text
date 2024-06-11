@@ -16,7 +16,7 @@ CREATE TABLE Producto (
     nombre VARCHAR(100),
     descripcion TEXT,
     precio INT,
-    imagen VARCHAR(200),
+    imagen VARCHAR,
     stock INT
 );
 

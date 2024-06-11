@@ -1,9 +1,7 @@
-import React, { useContext, useState } from 'react';
-import { StoreContext } from '../../context/ContextAdm';
+import React, { useState } from 'react';
 import { Form, Button, Container } from 'react-bootstrap';
 
-const CrearProducto = () => {
-  const { productos, setProductos } = useContext(StoreContext);
+const CrearProducto = ({ onClose }) => {
   const [nombre, setNombre] = useState('');
   const [descripcion, setDescripcion] = useState('');
   const [precio, setPrecio] = useState('');
@@ -19,24 +17,7 @@ const CrearProducto = () => {
       stock,
       imagen
     };
-    try {
-      const response = await fetch('http://localhost:3000/api/productos', {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify(nuevoProducto),
-      });
-      if (response.ok) {
-        const data = await response.json();
-        setProductos([...productos, data]);
-        console.log('Producto creado:', data);
-      } else {
-        console.error('Error al crear producto');
-      }
-    } catch (error) {
-      console.error('Error:', error);
-    }
+    onClose();
   };
 
   return (
@@ -64,6 +45,7 @@ const CrearProducto = () => {
           <Form.Control type="text" value={imagen} onChange={(e) => setImagen(e.target.value)} required />
         </Form.Group>
         <Button variant="primary" type="submit">Crear Producto</Button>
+        <Button variant="secondary" onClick={onClose} className="ml-2">Cerrar</Button>
       </Form>
     </Container>
   );

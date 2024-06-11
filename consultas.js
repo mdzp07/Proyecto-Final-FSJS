@@ -24,11 +24,17 @@ const getProductoById = async (id) => {
 }
 
 const createProducto = async (nombre, descripcion, precio, imagen, stock) => {
-    const consulta = "INSERT INTO producto (nombre, descripcion, precio, imagen, stock) VALUES ($1, $2, $3, $4, $5) RETURNING *";
-    const values = [nombre, descripcion, precio, imagen, stock];
-    const { rows } = await pool.query(consulta, values);
-    return rows[0];
-}
+    try {
+        const consulta = "INSERT INTO producto (nombre, descripcion, precio, imagen, stock) VALUES ($1, $2, $3, $4, $5) RETURNING *";
+        const values = [nombre, descripcion, precio, imagen, stock];
+        const { rows } = await pool.query(consulta, values);
+        return rows[0];
+    } catch (error) {
+        console.error('Error al crear producto:', error);
+        throw error; // Re-lanza el error para que el código que llama a esta función pueda manejarlo
+    }
+};
+
 
 const updateProducto = async (id, nombre, descripcion, precio, imagen, stock) => {
     const consulta = "UPDATE producto SET nombre = $1, descripcion = $2, precio = $3, imagen = $4, stock = $5 WHERE id_producto = $6 RETURNING *";
