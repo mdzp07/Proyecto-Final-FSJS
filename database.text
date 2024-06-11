@@ -34,3 +34,17 @@ CREATE TABLE Detalle_Carrito (
     FOREIGN KEY (ID_Producto) REFERENCES Producto(ID_Producto),
     FOREIGN KEY (ID_Carrito) REFERENCES Carrito(ID_Carrito)
 );
+
+INSERT INTO Producto (nombre, descripcion, precio, imagen, stock) VALUES
+('Mouse Gamer RGB LED', 'Mouse gamer con iluminacion RGB y 6 botones programables.', 25990, 'https://m.media-amazon.com/images/I/61UxfXTUyvL._SL500_.jpg', 47),
+('Teclado Mecanico Retroiluminado', 'Teclado mecanico con teclas retroiluminadas y diseño ergonomico.', 49990, 'https://m.media-amazon.com/images/I/71OH4BueKmL._AC_SL1500_.jpg', 123),
+('Audifonos Gamer con Microfono', 'Audifonos gamer con microfono incorporado y sonido envolvente.', 35490, 'https://m.media-amazon.com/images/I/61CGHv6kmWL._SL500_.jpg', 78),
+('Pantalla Inalambrica 24 Pulgadas', 'Pantalla inalambrica Full HD de 24 pulgadas con altavoces integrados.', 189990, 'https://m.media-amazon.com/images/I/71lW36iFX+L._AC_SL1500_.jpg', 56),
+('Camara Web Full HD', 'Camara web Full HD con microfono integrado y conexion USB.', 29990, 'https://dlcdnwebimgs.asus.com/gain/818d26a5-2d8b-49e3-8381-86fb5945d8cd/', 92),
+('Disco Duro Externo 1TB', 'Disco duro externo de 1TB con conexion USB 3.0.', 64990, 'https://m.media-amazon.com/images/I/81tjLksKixL._SL500_.jpg', 145),
+('Adaptador USB-C a HDMI', 'Adaptador USB-C a HDMI con soporte para 4K.', 19990, 'https://www.jib.co.th/img_master/product/original/2022032909250352378_1.jpg', 153),
+('Monitor Curvo 27 Pulgadas', 'Monitor curvo de 27 pulgadas con resolucion QHD.', 249990, 'https://www.precio-calidad.com.ar/wp-content/uploads/2020/10/MONITOR-TUF-GAMING-VG27VQ-2.jpg', 66),
+('Base Enfriadora para Laptop', 'Base enfriadora con ventiladores y ajuste de altura para laptops.', 14990, 'https://http2.mlstatic.com/D_NQ_NP_2X_740048-CBT49538239622_032022-F.jpg', 172),
+('Smartwatch Deportivo', 'Reloj inteligente con monitoreo de actividad fisica y notificaciones.', 39990, 'http://techzone.com.mx/cdn/shop/files/TZSW04-1_e99ce64f-2cc2-4510-8369-5be1d8daa8b9.jpg?v=1695971774', 95),
+('Tableta Grafica para Dibujo', 'Tableta grafica con alta precision para ilustradores y disenadores.', 89990, 'https://m.media-amazon.com/images/I/61IxO1tTsRL._AC_SL1500_.jpg', 58),
+('Aro de Luz LED 10 Pulgadas', 'Aro de luz LED de 10 pulgadas con tripode ajustable y control remoto.', 24990, 'https://iluminashop.com/wp-content/uploads/2021/01/kit-aro-anillo-de-luz-led-selfie-10-pulgadas-con-tripode-para-movil3.jpg', 109);
