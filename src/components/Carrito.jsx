@@ -69,14 +69,16 @@ const Carrito = () => {
         <p>Detalle del pedido:</p>
         {render.map((i, x) => (
           <div className='card-carro' key={i.title}>
-            <div>
+            <div className='caja-carro-img'>
               <img className='card-carro-img' src={i.image} alt={i.title} />
               <p>
                 {i.title}
               </p>
             </div>
-            <div className=''>
-              <p>${(i.sum * i.price).toLocaleString("de-DE")}</p>
+            <div className='caja-precio-comando'>
+              <div className='carro-caja-precio'>
+                  <p>${(i.sum * i.price).toLocaleString("de-DE")}</p>
+              </div>
               <div className='card-carro-comandos'>
                 <button
                   onClick={() => add(false, i.title, i)}
