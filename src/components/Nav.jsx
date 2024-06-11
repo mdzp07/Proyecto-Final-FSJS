@@ -1,6 +1,7 @@
 import { Link } from 'react-router-dom';
 import 'bootstrap/dist/css/bootstrap.min.css';
 
+
 const Nav = () => {
     return (
         <nav className="navbar navbar-expand-lg navbar-light bg-light">
