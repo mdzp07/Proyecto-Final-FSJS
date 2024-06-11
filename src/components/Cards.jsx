@@ -32,7 +32,7 @@ const Cards = () => {
                 {data.map((item, index) => (
                     <div key={index} className="col-md-3">
                         <div className="card mb-3">
-                            <img src={item.imagen} className="card-img-top" alt={item.nombre} />
+                            <img src={item.imagen} className="card-img-top" alt={item.descripcion} />
                             <div className="card-body">
                                 <h5 className="card-title">{item.nombre.substring(0, 100)}</h5>
                                 <p className="card-text">{item.descripcion.substring(0, 100)}</p>
