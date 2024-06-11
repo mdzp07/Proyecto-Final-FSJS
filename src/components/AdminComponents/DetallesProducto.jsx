@@ -1,22 +1,16 @@
 import React from 'react';
-import { Card, Row, Col } from 'react-bootstrap';
+import { Card } from 'react-bootstrap';
 
 const DetallesProducto = ({ producto }) => {
   return (
-    <Card className="mt-3">
-      <Row noGutters>
-        <Col md={4}>
-          <Card.Img src={producto.imagen} alt={producto.nombre} />
-        </Col>
-        <Col md={8}>
-          <Card.Body>
-            <Card.Title>Detalles del Producto {producto.nombre}</Card.Title>
-            <Card.Text>Descripción: {producto.descripcion}</Card.Text>
-            <Card.Text>Precio Unitario: ${producto.precio}</Card.Text>
-            <Card.Text>Stock: {producto.stock}</Card.Text>
-          </Card.Body>
-        </Col>
-      </Row>
+    <Card>
+      <Card.Img variant="top" src={producto.imagen} alt={producto.nombre} />
+      <Card.Body>
+        <Card.Title>{producto.nombre}</Card.Title>
+        <Card.Text>{producto.descripcion}</Card.Text>
+        <Card.Text>Precio: ${producto.precio}</Card.Text>
+        <Card.Text>Stock: {producto.stock}</Card.Text>
+      </Card.Body>
     </Card>
   );
 };

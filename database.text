@@ -12,9 +12,9 @@ CREATE TABLE Usuario (
 CREATE TABLE Producto (
     ID_Producto SERIAL PRIMARY KEY,
     nombre VARCHAR(100),
-    descripción TEXT,
-    precio DECIMAL(10, 2),
-    imagen VARCHAR(200),
+    descripcion TEXT,
+    precio INT,
+    imagen VARCHAR,
     stock INT
 );
 

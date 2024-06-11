@@ -1,26 +1,23 @@
-import React, { useContext, useState } from 'react';
-import { StoreContext } from '../../context/ContextAdm';
+import React, { useState } from 'react';
 import { Form, Button, Container } from 'react-bootstrap';
 
-const CrearProducto = () => {
-  const { productos, setProductos } = useContext(StoreContext);
+const CrearProducto = ({ onClose }) => {
   const [nombre, setNombre] = useState('');
   const [descripcion, setDescripcion] = useState('');
   const [precio, setPrecio] = useState('');
   const [stock, setStock] = useState('');
   const [imagen, setImagen] = useState('');
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
     const nuevoProducto = {
-      id: productos.length + 1,
       nombre,
       descripcion,
       precio,
       stock,
       imagen
     };
-    setProductos([...productos, nuevoProducto]);
+    onClose();
   };
 
   return (
@@ -48,6 +45,7 @@ const CrearProducto = () => {
           <Form.Control type="text" value={imagen} onChange={(e) => setImagen(e.target.value)} required />
         </Form.Group>
         <Button variant="primary" type="submit">Crear Producto</Button>
+        <Button variant="secondary" onClick={onClose} className="ml-2">Cerrar</Button>
       </Form>
     </Container>
   );

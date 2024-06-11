@@ -9,6 +9,7 @@ const AdmProductos = () => {
   const { productos, setProductos } = useContext(StoreContext);
   const [productoSeleccionado, setProductoSeleccionado] = useState(null);
   const [modoEditar, setModoEditar] = useState(false);
+  const [mostrarCrearProducto, setMostrarCrearProducto] = useState(false);
 
   const handleEliminar = (id) => {
     setProductos(productos.filter(producto => producto.id !== id));
@@ -17,17 +18,41 @@ const AdmProductos = () => {
   const handleModificar = (producto) => {
     setProductoSeleccionado(producto);
     setModoEditar(true);
+    setMostrarCrearProducto(false); // Cerrar el formulario de creación al abrir el de modificación
+  };
+
+  const handleCrearProducto = () => {
+    setProductoSeleccionado(null);
+    setModoEditar(false);
+    setMostrarCrearProducto(true); // Abrir el formulario de creación al hacer clic en "Crear Producto"
+  };
+
+  const handleCerrarFormulario = () => {
+    setProductoSeleccionado(null);
+    setModoEditar(false);
+    setMostrarCrearProducto(false);
   };
 
   return (
     <Container fluid>
       <Row className="my-4">
         <Col>
-          <Button variant="primary" onClick={() => { setProductoSeleccionado({}); setModoEditar(false); }}>
+          <Button variant="primary" onClick={handleCrearProducto}>
             Crear Producto
           </Button>
         </Col>
       </Row>
+      {mostrarCrearProducto && (
+        <Row>
+          <Col md={{ span: 10, offset: 1 }}>
+            <Card className="mt-4">
+              <Card.Body>
+                <CrearProducto onClose={handleCerrarFormulario} />
+              </Card.Body>
+            </Card>
+          </Col>
+        </Row>
+      )}
       <Row>
         <Col md={{ span: 10, offset: 1 }}>
           <Table striped bordered hover>
@@ -59,31 +84,17 @@ const AdmProductos = () => {
           </Table>
         </Col>
       </Row>
-      <Row>
-        <Col md={{ span: 10, offset: 1 }}>
-          {productoSeleccionado && productoSeleccionado.id && !modoEditar && (
+      {productoSeleccionado && modoEditar && (
+        <Row>
+          <Col md={{ span: 10, offset: 1 }}>
             <Card className="mt-4">
               <Card.Body>
-                <DetallesProducto producto={productoSeleccionado} />
+                <ModificarProducto producto={productoSeleccionado} setModoEditar={setModoEditar} onClose={handleCerrarFormulario} />
               </Card.Body>
             </Card>
-          )}
-          {productoSeleccionado && modoEditar && (
-            <Card className="mt-4">
-              <Card.Body>
-                <ModificarProducto producto={productoSeleccionado} setModoEditar={setModoEditar} />
-              </Card.Body>
-            </Card>
-          )}
-          {productoSeleccionado && !productoSeleccionado.id && !modoEditar && (
-            <Card className="mt-4">
-              <Card.Body>
-                <CrearProducto />
-              </Card.Body>
-            </Card>
-          )}
-        </Col>
-      </Row>
+          </Col>
+        </Row>
+      )}
     </Container>
   );
 };
