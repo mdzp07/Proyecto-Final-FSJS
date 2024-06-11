@@ -3,11 +3,8 @@ import cors from 'cors';
 import dotenv from 'dotenv';
 import {
     getProductos, getProductoById, createProducto, updateProducto, deleteProducto,
-<<<<<<< HEAD
     getUsuarios, getUsuarioById, createUsuario, updateUsuario, deleteUsuario, autenticarUsuario,
-=======
-    getUsuarios, getUsuarioById, createUsuario, updateUsuario, deleteUsuario
->>>>>>> 3bc91548c68ab11d46702e701529f984c9891e51
+
 } from './consultas.js';
 
 dotenv.config();
