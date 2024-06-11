@@ -1,22 +1,52 @@
-import React from 'react';
+import React, { useState } from 'react';
 import 'bootstrap/dist/css/bootstrap.min.css';
 
 const FormularioLg = () => {
+  
+  const [correo, setCorreo] = useState('');
+  const [contrasena, setContrasena] = useState('');
+
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    try {
+      console.log(correo, contrasena);  
+      const response = await fetch('http://localhost:3001/autenticar', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({ correo, clave: contrasena })});
+
+      if (response.ok) {
+        const data = await response.json();
+        console.log('Usuario registrado:', data);
+        if(data){
+            alert("¡Usuario autenticado exitosamente!")
+        }else{
+            alert("¡Credenciales invalidas!") 
+        }
+      } else {
+        console.error('Error al ingresar usuario');
+        alert("¡Error al autenticar usuario!")
+      }
+    } catch (error) {
+      console.error('Error:', error);
+    }
+  };
+
     return (
-        <div className="container">
-            <h1>FormularioLg</h1>
-            <form>
-                <div className="mb-3">
-                    <label htmlFor="email" className="form-label">Correo electrónico</label>
-                    <input type="email" className="form-control" id="email" placeholder="nombre@ejemplo.com" />
-                </div>
-                <div className="mb-3">
-                    <label htmlFor="password" className="form-label">Contraseña</label>
-                    <input type="password" className="form-control" id="password" placeholder="Contraseña" />
-                </div>
-                <button type="submit" className="btn btn-primary">Iniciar sesión</button>
-            </form>
+        <form onSubmit={handleSubmit}>
+        <h1>FormularioLG</h1>
+        <div className="mb-3">
+          <label htmlFor="correo" className="form-label">Correo</label>
+          <input type="email" className="form-control" id="correo" value={correo} onChange={(e) => setCorreo(e.target.value)} placeholder="Correo" />
         </div>
+        <div className="mb-3">
+          <label htmlFor="contrasena" className="form-label">Contraseña</label>
+          <input type="password" className="form-control" id="contrasena" value={contrasena} onChange={(e) => setContrasena(e.target.value)} placeholder="Contraseña" />
+        </div>
+        <button type="submit" className="btn btn-primary">Iniciar sesión</button>
+      </form>
     );
 }
 

@@ -6,8 +6,6 @@ CREATE TABLE Usuario (
     ID_Usuario SERIAL PRIMARY KEY,
     nombre VARCHAR(100),
     correo VARCHAR(100),
-    telefono VARCHAR(20),
-    direccion VARCHAR(200),
     clave VARCHAR(100)
 );
 
