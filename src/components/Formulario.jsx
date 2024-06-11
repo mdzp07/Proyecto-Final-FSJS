@@ -9,17 +9,17 @@ const Formulario = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      const response = await fetch('http://localhost:3000/api/usuarios', {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify({ nombre, correo, clave: contrasena }),
-      });
+      const response = await fetch('http://localhost:3001/api/usuarios', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({ nombre, correo, clave: contrasena })});
 
       if (response.ok) {
         const data = await response.json();
         console.log('Usuario registrado:', data);
+        alert("¡Usuario guardado exitosamente!")
       } else {
         console.error('Error al registrar usuario');
       }
@@ -42,7 +42,7 @@ const Formulario = () => {
         <label htmlFor="contrasena" className="form-label">Contraseña</label>
         <input type="password" className="form-control" id="contrasena" value={contrasena} onChange={(e) => setContrasena(e.target.value)} placeholder="Contraseña" />
       </div>
-      <button type="submit" className="btn btn-primary">Enviar</button>
+      <button type="submit" className="btn btn-primary">registrar usuario</button>
     </form>
   );
 };

@@ -3,15 +3,16 @@ import cors from 'cors';
 import dotenv from 'dotenv';
 import {
     getProductos, getProductoById, createProducto, updateProducto, deleteProducto,
-    getUsuarios, getUsuarioById, createUsuario, updateUsuario, deleteUsuario
+    getUsuarios, getUsuarioById, createUsuario, updateUsuario, deleteUsuario, autenticarUsuario,
+
 } from './consultas.js';
 
 dotenv.config();
 
 const app = express();
 
-app.listen(3000, () => {
-    console.log(`Servidor encendido en puerto 3000`);
+app.listen(3001, () => {
+    console.log(`Servidor encendido en puerto 3001`);
 });
 
 app.use(cors());
@@ -70,6 +71,8 @@ app.delete('/api/productos/:id', async (req, res) => {
 });
 
 // Rutas para usuarios
+
+
 app.get('/api/usuarios', async (req, res) => {
     try {
         const usuarios = await getUsuarios();
@@ -88,9 +91,21 @@ app.get('/api/usuarios/:id', async (req, res) => {
     }
 });
 
+app.post('/autenticar', async (req, res) => {
+    try {
+        const {correo, clave} = req.body;
+        console.log(req.body)
+        const usuario = await autenticarUsuario(correo, clave);
+        res.json(usuario);
+    } catch (err) {
+        res.status(500).send(err.message);
+    }
+});
+
 app.post('/api/usuarios', async (req, res) => {
     try {
         const { nombre, correo, clave } = req.body;
+        console.log(req.body);
         const newUsuario = await createUsuario(nombre, correo, clave);
         res.json(newUsuario);
     } catch (err) {

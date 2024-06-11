@@ -1,6 +1,8 @@
 import pkg from 'pg';
 const { Pool } = pkg;
 import { config } from 'dotenv';
+import bcrypt from 'bcryptjs';
+import jwt from 'jsonwebtoken';
 
 config();
 
@@ -11,6 +13,41 @@ const pool = new Pool({
     database: process.env.DATABASE,
     allowExitOnIdle: true
 });
+
+// Autenticación de usuario
+const autenticarUsuario = async (email, password) => {
+    try {
+        console.log("pasó1: ", email, password);
+        const consulta = "SELECT * FROM usuario WHERE correo = $1";
+        const values = [email];
+        console.log('Consulta:', consulta, 'Values:', values);
+        
+        const result = await pool.query(consulta, values);
+        console.log('Resultado de la consulta:', result.rows[0].clave);
+
+        if (result.rowCount === 0) {
+            console.log('No se encontró el usuario con ese correo.');
+            return false;
+        }
+
+        const passwordEncriptada = result.rows[0].clave;
+        const passwordEsCorrecta = bcrypt.compareSync(password, passwordEncriptada);
+        console.log(passwordEsCorrecta);
+
+        if (!passwordEsCorrecta) {
+            console.log('Contraseña incorrecta.');
+            return false;
+        }
+
+        const token = jwt.sign({ email }, "az_AZ", { expiresIn: "1h" });
+        return token;
+    } catch (err) {
+        console.error('Error en la autenticación:', err);
+        return false;
+    }
+}
+
+
 
 // Consultas para los productos
 const getProductos = async () => {
@@ -58,9 +95,11 @@ const getUsuarioById = async (id) => {
     return rows[0];
 }
 
-const createUsuario = async (nombre, correo, clave) => {
-    const consulta = 'INSERT INTO Usuario (nombre, correo, clave) VALUES ($1, $2, $3) RETURNING *';
-    const values = [nombre, correo, clave];
+const createUsuario = async (nombre, correo, password) => {
+    const passwordEncriptada = bcrypt.hashSync(password);
+    console.log("hola:", nombre, correo, passwordEncriptada)
+    const consulta = "INSERT INTO usuario values (DEFAULT, $1, $2, $3) RETURNING *";
+    const values = [nombre, correo, passwordEncriptada];
     const { rows } = await pool.query(consulta, values);
     return rows[0];
 };
@@ -77,6 +116,7 @@ const deleteUsuario = async (id) => {
 }
 
 export {
+    autenticarUsuario,
     getProductos,
     getProductoById,
     createProducto,
@@ -86,5 +126,5 @@ export {
     getUsuarioById,
     createUsuario,
     updateUsuario,
-    deleteUsuario
+    deleteUsuario,
 };
