@@ -30,12 +30,12 @@ const Cards = () => {
             <h1 className='product-title'>Productos</h1>
             <div className="row">
                 {data.map((item, index) => (
-                    <div key={index} className="col-md-3">
-                        <div className="card mb-3">
+                    <div key={index} className="col-md-3 d-flex align-items-stretch g-3"> 
+                        <div className="card mb-3 h-100">
                             <img src={item.imagen} className="card-img-top" alt={item.descripcion} />
                             <div className="card-body">
-                                <h5 className="card-title">{item.nombre.substring(0, 100)}</h5>
-                                <p className="card-text">{item.descripcion.substring(0, 100)}</p>
+                                <h5 className="card-title">{item.nombre.length > 50 ? item.nombre.substring(0, 50) + '...' : item.nombre}</h5>
+                                <p className="card-text">{item.descripcion.length > 50 ? item.descripcion.substring(0, 50) + '...' : item.descripcion}</p>
                                 <p className='card-text'>$ {item.precio}</p>
                                 <div className=''>
                                     <button className='cajaBoton' onClick={() => add(item, index)}>
@@ -50,6 +50,6 @@ const Cards = () => {
             </div>
         </div>
     );
-};
+}
 
 export default Cards;
