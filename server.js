@@ -11,8 +11,8 @@ dotenv.config();
 
 const app = express();
 
-app.listen(3001, () => {
-    console.log(`Servidor encendido en puerto 3001`);
+app.listen(3000, () => {
+    console.log(`Servidor encendido en puerto 3000`);
 });
 
 app.use(cors());
