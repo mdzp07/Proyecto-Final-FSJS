@@ -11,7 +11,7 @@ const Banner = () => {
                 </Link>
                 <Link to="/Login">
                     <button className="Comandos__button">
-                        <i className="bi bi-journal-text"></i>
+                    <i className="bi bi-box-arrow-in-up"></i>
                     </button>
                 </Link>
                 <Link to="/Perfil">
@@ -24,11 +24,7 @@ const Banner = () => {
                         <i className="bi bi-cart-fill"></i>
                     </button>
                 </Link>
-                <Link to="/salir">
-                    <button className="Comandos__button">
-                        <i className="bi bi-box-arrow-right"></i>
-                    </button>
-                </Link>
+                
             </div>
         </div>
     );

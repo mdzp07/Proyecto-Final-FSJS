@@ -10,7 +10,7 @@ const FormularioLg = () => {
     e.preventDefault();
     try {
       console.log(correo, contrasena);  
-      const response = await fetch('http://localhost:3001/autenticar', {
+      const response = await fetch('http://localhost:3000/autenticar', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
@@ -35,7 +35,8 @@ const FormularioLg = () => {
   };
 
     return (
-        <form onSubmit={handleSubmit}>
+      <div className="container contenedor-registro">
+        <form className='contenedor-formulario' onSubmit={handleSubmit}>
         <h1>FormularioLG</h1>
         <div className="mb-3">
           <label htmlFor="correo" className="form-label">Correo</label>
@@ -47,7 +48,9 @@ const FormularioLg = () => {
         </div>
         <button type="submit" className="btn btn-primary">Iniciar sesión</button>
       </form>
-    );
+    </div>
+  );
+
 }
 
 export default FormularioLg;

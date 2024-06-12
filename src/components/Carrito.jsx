@@ -4,48 +4,44 @@ import { Context } from '../context/Context';
 
 const Carrito = () => {
 
-
-  //Context
+  // Context
   const { car, setCar } = useContext(Context);
-  console.log(car)
-
+  
   // Ordeno mi Context tipo arreglo de objetos alfabeticamente
   car.sort((a, b) => {
-    if (a.title < b.title) {
+    if (a.nombre < b.nombre) {
       return -1;
     }
-    if (a.title > b.title) {
+    if (a.nombre > b.nombre) {
       return 1;
     }
     return 0;
   });
 
-  //Creo un conjunto de datos Set()
+  // Creo un conjunto de datos Set()
   const products = new Set();
 
-  //Render es un objeto local que se usará para renderizar
+  // Render es un objeto local que se usará para renderizar
   const render = [];
 
-  //Agregar elementos al conjunto de datos
+  // Agregar elementos al conjunto de datos
   car.forEach((i) => {
-    const { title } = i;
-    if (!products.has(title)) {
-      products.add(title);
+    const { nombre } = i;
+    if (!products.has(nombre)) {
+      products.add(nombre);
       render.push(i);
-      i.sum = car.filter((i) => i.title === title).length;
+      i.sum = car.filter((i) => i.nombre === nombre).length;
     }
   });
 
-  console.log(render)
-
-  //Agregar o quitar productos
+  // Agregar o quitar productos
   const add = (bolean, name, object) => {
     if (bolean) setCar((currentObj) => [...currentObj, object]);
     else
       setCar((currentObj) => {
         let deleted = false;
         return currentObj.filter((i) => {
-          if (!deleted && i.title === name) {
+          if (!deleted && i.nombre === name) { // Aquí cambié i.title a i.nombre
             deleted = true;
             return false;
           }
@@ -54,11 +50,11 @@ const Carrito = () => {
       });
   };
 
-  //Calcular total
+  // Calcular total
   const Total = () => {
     let sum = 0;
     for (const i of car)
-      sum = sum + i.price;
+      sum = sum + i.precio;
 
     return sum.toLocaleString("de-DE");
   };
@@ -68,26 +64,26 @@ const Carrito = () => {
       {car.length == 0 ? (<div className='mensaje-carro-vacio'><p>¡Ops! Esto parece estar vacío</p></div>) : (<section>
         <p>Detalle del pedido:</p>
         {render.map((i, x) => (
-          <div className='card-carro' key={i.title}>
+          <div className='card-carro' key={i.nombre}>
             <div className='caja-carro-img'>
-              <img className='card-carro-img' src={i.image} alt={i.title} />
+              <img className='card-carro-img' src={i.imagen} alt={i.nombre} />
               <p>
-                {i.title}
+                {i.nombre}
               </p>
             </div>
             <div className='caja-precio-comando'>
               <div className='carro-caja-precio'>
-                  <p>${(i.sum * i.price).toLocaleString("de-DE")}</p>
+                  <p>${(i.sum * i.precio).toLocaleString("de-DE")}</p>
               </div>
               <div className='card-carro-comandos'>
                 <button
-                  onClick={() => add(false, i.title, i)}
+                  onClick={() => add(false, i.nombre, i)}
                 >
                   -
                 </button>
                 <h5>{i.sum}</h5>
                 <button
-                  onClick={() => add(true, i.title, i)}
+                  onClick={() => add(true, i.nombre, i)}
                 >
                   +
                 </button>
@@ -102,4 +98,5 @@ const Carrito = () => {
     </>
   );
 }
+
 export default Carrito;

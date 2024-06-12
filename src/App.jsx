@@ -11,12 +11,10 @@ import Administrador from './components/AdminComponents/Administrador';
 import { StoreProvider } from './context/ContextAdm';
 import ContextProvider from './context/Context';
 
-
 function App() {
   return (
     <StoreProvider>
           <ContextProvider>
-
       <div className='App'>
         <Routes>
           <Route path='/' element={<Index />} />
@@ -28,9 +26,7 @@ function App() {
           <Route path='/Administrador' element={<Administrador />} />
         </Routes>
       </div>
-
       </ContextProvider>
-
     </StoreProvider>
   );
 }

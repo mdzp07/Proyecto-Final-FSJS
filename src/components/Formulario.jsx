@@ -9,7 +9,7 @@ const Formulario = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      const response = await fetch('http://localhost:3001/api/usuarios', {
+      const response = await fetch('http://localhost:3000/api/usuarios', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
@@ -29,7 +29,8 @@ const Formulario = () => {
   };
 
   return (
-    <form onSubmit={handleSubmit}>
+    <div className="container contenedor-registro">
+    <form className='contenedor-formulario' onSubmit={handleSubmit}>
       <div className="mb-3">
         <label htmlFor="nombre" className="form-label">Nombre</label>
         <input type="text" className="form-control" id="nombre" value={nombre} onChange={(e) => setNombre(e.target.value)} placeholder="Nombre" />
@@ -44,6 +45,7 @@ const Formulario = () => {
       </div>
       <button type="submit" className="btn btn-primary">registrar usuario</button>
     </form>
+  </div>
   );
 };
 
