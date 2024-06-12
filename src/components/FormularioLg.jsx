@@ -35,9 +35,9 @@ const FormularioLg = () => {
   };
 
     return (
-      <div className="container contenedor-registrolg">
-        <form className='contenedor-formulariolg' onSubmit={handleSubmit}>
-        <h1>Login</h1>
+      <div className="container contenedor-registro">
+        <form className='contenedor-formulario' onSubmit={handleSubmit}>
+        <h1>FormularioLG</h1>
         <div className="mb-3">
           <label htmlFor="correo" className="form-label">Correo</label>
           <input type="email" className="form-control" id="correo" value={correo} onChange={(e) => setCorreo(e.target.value)} placeholder="Correo" />
@@ -49,7 +49,8 @@ const FormularioLg = () => {
         <button type="submit" className="btn btn-primary">Iniciar sesión</button>
       </form>
     </div>
-    );
+  );
+
 }
 
 export default FormularioLg;

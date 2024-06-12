@@ -1,10 +1,9 @@
+// Cards.js
 import React, { useEffect, useState, useContext } from 'react';
 import { Context } from '../context/Context';
 
 const Cards = () => {
-
-    const { car, setCar } = useContext(Context);
-
+    const { car, setCar, likes, setLikes } = useContext(Context);
     const [data, setData] = useState([]);
 
     const fetchData = async () => {
@@ -21,6 +20,18 @@ const Cards = () => {
         setCar((currentProduct) => [...currentProduct, i]);
     }
 
+    const handleLikeClick = (index) => {
+        setLikes((prevLikes) => {
+            const newLikes = [...prevLikes];
+            if (!newLikes.includes(index)) {
+                newLikes.push(index);
+            } else {
+                newLikes.splice(newLikes.indexOf(index), 1);
+            }
+            return newLikes;
+        });
+    };
+
     useEffect(() => {
         fetchData();
     }, []);
@@ -30,7 +41,7 @@ const Cards = () => {
             <h1 className='product-title'>Productos</h1>
             <div className="row">
                 {data.map((item, index) => (
-                    <div key={index} className="col-md-3 d-flex align-items-stretch g-3"> 
+                    <div key={index} className="col-md-3 d-flex align-items-stretch g-3">
                         <div className="card mb-3 h-100">
                             <img src={item.imagen} className="card-img-top" alt={item.descripcion} />
                             <div className="card-body">
@@ -38,9 +49,13 @@ const Cards = () => {
                                 <p className="card-text">{item.descripcion.length > 50 ? item.descripcion.substring(0, 50) + '...' : item.descripcion}</p>
                                 <p className='card-text'>$ {item.precio}</p>
                                 <div className=''>
+                                    <button className={`cajaBoton ${likes.includes(index) ? 'liked' : ''}`} onClick={() => handleLikeClick(index)}>
+                                        <i className={`bi bi-heart${likes.includes(index) ? '-fill' : ''} carro`} style={{ color: 'red' }}></i>
+                                        <span className='add'>{likes.includes(index) ? 'Quitar de Favoritos' : 'Añadir a Favoritos'}</span>
+                                    </button>
                                     <button className='cajaBoton' onClick={() => add(item, index)}>
                                         <i className="bi bi-cart carro"></i>
-                                        <span className='add'>Añadir al carrito</span> 
+                                        <span className='add'>Añadir al carrito</span>
                                     </button>
                                 </div>
                             </div>
@@ -53,3 +68,4 @@ const Cards = () => {
 }
 
 export default Cards;
+

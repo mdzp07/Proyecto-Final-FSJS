@@ -4,11 +4,9 @@ import { Context } from '../context/Context';
 
 const Carrito = () => {
 
-
-  //Context
+  // Context
   const { car, setCar } = useContext(Context);
-  console.log(car)
-
+  
   // Ordeno mi Context tipo arreglo de objetos alfabeticamente
   car.sort((a, b) => {
     if (a.nombre < b.nombre) {
@@ -20,13 +18,13 @@ const Carrito = () => {
     return 0;
   });
 
-  //Creo un conjunto de datos Set()
+  // Creo un conjunto de datos Set()
   const products = new Set();
 
-  //Render es un objeto local que se usará para renderizar
+  // Render es un objeto local que se usará para renderizar
   const render = [];
 
-  //Agregar elementos al conjunto de datos
+  // Agregar elementos al conjunto de datos
   car.forEach((i) => {
     const { nombre } = i;
     if (!products.has(nombre)) {
@@ -36,16 +34,14 @@ const Carrito = () => {
     }
   });
 
-  console.log(render)
-
-  //Agregar o quitar productos
+  // Agregar o quitar productos
   const add = (bolean, name, object) => {
     if (bolean) setCar((currentObj) => [...currentObj, object]);
     else
       setCar((currentObj) => {
         let deleted = false;
         return currentObj.filter((i) => {
-          if (!deleted && i.title === name) {
+          if (!deleted && i.nombre === name) { // Aquí cambié i.title a i.nombre
             deleted = true;
             return false;
           }
@@ -54,7 +50,7 @@ const Carrito = () => {
       });
   };
 
-  //Calcular total
+  // Calcular total
   const Total = () => {
     let sum = 0;
     for (const i of car)
@@ -102,4 +98,5 @@ const Carrito = () => {
     </>
   );
 }
+
 export default Carrito;
