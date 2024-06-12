@@ -108,11 +108,11 @@ const getUsuarioById = async (id) => {
     return rows[0];
 }
 
-const createUsuario = async (nombre, correo, password) => {
+const createUsuario = async (nombre, correo, password, rol = 'usuario') => {
     const passwordEncriptada = bcrypt.hashSync(password);
-    console.log("hola:", nombre, correo, passwordEncriptada)
-    const consulta = "INSERT INTO usuario values (DEFAULT, $1, $2, $3) RETURNING *";
-    const values = [nombre, correo, passwordEncriptada];
+    console.log("hola:", nombre, correo, passwordEncriptada, rol);
+    const consulta = "INSERT INTO usuario (nombre, correo, clave, rol) VALUES ($1, $2, $3, $4) RETURNING *";
+    const values = [nombre, correo, passwordEncriptada, rol];
     const { rows } = await pool.query(consulta, values);
     return rows[0];
 };

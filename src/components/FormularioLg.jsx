@@ -38,7 +38,8 @@ const FormularioLg = () => {
   };
 
     return (
-        <form onSubmit={handleSubmit}>
+      <div className="container contenedor-registro">
+        <form className='contenedor-formulario' onSubmit={handleSubmit}>
         <h1>FormularioLG</h1>
         <div className="mb-3">
           <label htmlFor="correo" className="form-label">Correo</label>
@@ -50,7 +51,9 @@ const FormularioLg = () => {
         </div>
         <button type="submit" className="btn btn-primary">Iniciar sesión</button>
       </form>
-    );
+    </div>
+  );
+
 }
 
 export default FormularioLg;

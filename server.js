@@ -122,14 +122,15 @@ app.post('/autenticar', async (req, res) => {
 
 app.post('/api/usuarios', async (req, res) => {
     try {
-        const { nombre, correo, clave } = req.body;
+        const { nombre, correo, clave, rol } = req.body; // Incluye el campo rol
         console.log(req.body);
-        const newUsuario = await createUsuario(nombre, correo, clave);
+        const newUsuario = await createUsuario(nombre, correo, clave, rol); // Pasa el rol a createUsuario
         res.json(newUsuario);
     } catch (err) {
         res.status(500).send(err.message);
     }
 });
+
 
 app.put('/api/usuarios/:id', async (req, res) => {
     try {
