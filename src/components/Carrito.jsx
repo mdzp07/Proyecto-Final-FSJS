@@ -1,102 +1,106 @@
 import 'bootstrap/dist/css/bootstrap.min.css';
 import React, { useContext } from 'react';
 import { Context } from '../context/Context';
+import { Card, CardContent, CardMedia, Typography, Button, Box, Grid, Container } from '@mui/material';
 
 const Carrito = () => {
-
-  // Context
+  // Contexto
   const { car, setCar } = useContext(Context);
-  
-  // Ordeno mi Context tipo arreglo de objetos alfabeticamente
-  car.sort((a, b) => {
-    if (a.nombre < b.nombre) {
-      return -1;
-    }
-    if (a.nombre > b.nombre) {
-      return 1;
-    }
-    return 0;
-  });
 
-  // Creo un conjunto de datos Set()
+  // Ordenar el carrito alfabéticamente
+  car.sort((a, b) => a.nombre.localeCompare(b.nombre));
+
+  // Crear un conjunto de productos
   const products = new Set();
 
-  // Render es un objeto local que se usará para renderizar
+  // Render es un arreglo local que se usará para renderizar
   const render = [];
 
-  // Agregar elementos al conjunto de datos
+  // Agregar elementos al conjunto de productos
   car.forEach((i) => {
     const { nombre } = i;
     if (!products.has(nombre)) {
       products.add(nombre);
       render.push(i);
-      i.sum = car.filter((i) => i.nombre === nombre).length;
+      i.sum = car.filter((item) => item.nombre === nombre).length;
     }
   });
 
-  // Agregar o quitar productos
-  const add = (bolean, name, object) => {
-    if (bolean) setCar((currentObj) => [...currentObj, object]);
-    else
-      setCar((currentObj) => {
-        let deleted = false;
-        return currentObj.filter((i) => {
-          if (!deleted && i.nombre === name) { // Aquí cambié i.title a i.nombre
-            deleted = true;
-            return false;
-          }
-          return true;
-        });
+  // Funciones para sumar, restar y eliminar productos
+  const sumar = (item) => {
+    setCar((currentObj) => [...currentObj, item]);
+  };
+
+  const restar = (item) => {
+    setCar((currentObj) => {
+      let deleted = false;
+      return currentObj.filter((i) => {
+        if (!deleted && i.nombre === item.nombre) {
+          deleted = true;
+          return false;
+        }
+        return true;
       });
+    });
+  };
+
+  const eliminar = (item) => {
+    setCar((currentObj) => currentObj.filter((i) => i.nombre !== item.nombre));
   };
 
   // Calcular total
   const Total = () => {
     let sum = 0;
-    for (const i of car)
-      sum = sum + i.precio;
-
+    for (const i of car) {
+      sum += i.precio;
+    }
     return sum.toLocaleString("de-DE");
   };
 
   return (
-    <>
-      {car.length == 0 ? (<div className='mensaje-carro-vacio'><p>¡Ops! Esto parece estar vacío</p></div>) : (<section>
-        <p>Detalle del pedido:</p>
-        {render.map((i, x) => (
-          <div className='card-carro' key={i.nombre}>
-            <div className='caja-carro-img'>
-              <img className='card-carro-img' src={i.imagen} alt={i.nombre} />
-              <p>
-                {i.nombre}
-              </p>
-            </div>
-            <div className='caja-precio-comando'>
-              <div className='carro-caja-precio'>
-                  <p>${(i.sum * i.precio).toLocaleString("de-DE")}</p>
-              </div>
-              <div className='card-carro-comandos'>
-                <button
-                  onClick={() => add(false, i.nombre, i)}
-                >
-                  -
-                </button>
-                <h5>{i.sum}</h5>
-                <button
-                  onClick={() => add(true, i.nombre, i)}
-                >
-                  +
-                </button>
-              </div>
-            </div>
-          </div>
-        ))}
-        <p>Total: ${Total()}</p>
-        <button>Ir a pagar</button>
-        <button>Hacer el pedido</button>
-      </section>)}
-    </>
+    <Container sx={{ display: 'flex', justifyContent: 'center', alignItems: 'center', minHeight: '100vh' }}>
+      {car.length === 0 ? (
+        <Box sx={{ display: 'flex', justifyContent: 'center', alignItems: 'center', height: '100vh'}}>
+          <Typography variant="h4">¡Ops! Esto parece estar vacío</Typography>
+        </Box>
+      ) : (
+        <Box sx={{ padding: 2, width: '100%', display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
+          <Typography variant="h6">Detalle del pedido:</Typography>
+          <Grid container spacing={2} justifyContent="center">
+            {render.map((i) => (
+              <Grid item xs={12} sm={6} md={4} lg={3} key={i.nombre}>
+                <Card>
+                  <CardMedia
+                    component="img"
+                    height="140"
+                    image={i.imagen}
+                    alt={i.nombre}
+                    style={{ objectFit: 'contain', margin: 'auto' }}
+                  />
+                  <CardContent>
+                    <Typography component="div" variant="h5">
+                      {i.nombre}
+                    </Typography>
+                    <Typography variant="subtitle1" color="text.secondary">
+                      ${(i.sum * i.precio).toLocaleString("de-DE")}
+                    </Typography>
+                  </CardContent>
+                  <Box sx={{ display: 'flex', justifyContent: 'center', paddingBottom: 2 }}>
+                    <Button variant="contained" color="primary" onClick={() => sumar(i)}>+</Button>
+                    <Typography variant="h6" sx={{ margin: '0 8px' }}>{i.sum}</Typography>
+                    <Button variant="contained" color="primary" onClick={() => restar(i)}>-</Button>
+                    <Button variant="contained" color="secondary" onClick={() => eliminar(i)}>Eliminar</Button>
+                  </Box>
+                </Card>
+              </Grid>
+            ))}
+          </Grid>
+          <Typography variant="h6" sx={{ marginTop: 2 }}>Total: ${Total()}</Typography>
+        </Box>
+      )}
+    </Container>
   );
-}
+};
 
 export default Carrito;
+
