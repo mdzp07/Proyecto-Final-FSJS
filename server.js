@@ -109,19 +109,19 @@ app.get('/api/usuarios/:id', async (req, res) => {
 
 
 
-///////////////////////////////////////////////////////7
+/////////////////////////////////////////////////////7
 // Middleware para verificar credenciales
-// const verificarCredenciales = (req, res, next) => {
-//     const { email, password } = req.body;
-//     if (!email || !password) {
-//       return res.status(400).json({ error: 'Correo electrónico y contraseña son obligatorios' });
-//     }
-//     console.log("Next sin problemas.")
-//     next();
-//   };
+const verificarCredenciales = (req, res, next) => {
+    const { correo, clave } = req.body;
+    if (!correo || !clave) {
+      return res.status(400).json({ error: 'Correo electrónico y contraseña son obligatorios' });
+    }
+    console.log("Next sin problemas.")
+    next();
+  };
 
 
-app.post('/autenticar', async (req, res) => {
+app.post('/autenticar', verificarCredenciales, async (req, res) => {
     try {
         const {correo, clave} = req.body;
         console.log(req.body)
