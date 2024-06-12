@@ -47,6 +47,19 @@ const autenticarUsuario = async (email, password) => {
     }
 }
 
+// Validar el token recibido en las cabeceras en la ruta
+const verificarYdecodificar = async (token) => {
+    console.log("Aqui el token en verificar: ", token)
+    jwt.verify(token, "az_AZ");
+    const {email} = jwt.decode(token);
+    console.log("Aqui lo que decodifica: ", email)
+    const consulta = "SELECT * FROM usuario WHERE correo = $1";
+    const values = [email];
+    const {rows, rowCount} = await pool.query(consulta, values);
+    console.log("Aqui lo que seria en rows: ", rows)
+    return(rows)
+  }
+
 
 
 // Consultas para los productos
@@ -125,6 +138,7 @@ export {
     getUsuarios,
     getUsuarioById,
     createUsuario,
+    verificarYdecodificar,
     updateUsuario,
     deleteUsuario,
 };

@@ -1,7 +1,13 @@
-import React, { useState } from 'react';
+import React, { useState, useContext } from 'react';
 import { Form, Button, Container } from 'react-bootstrap';
+import { TokenContext } from '../../context/ContextToken';
 
 const CrearProducto = ({ onClose }) => {
+
+  const { token } = useContext(TokenContext);
+
+  console.log("toquen en crear producto: ", token);
+
   const [nombre, setNombre] = useState('');
   const [descripcion, setDescripcion] = useState('');
   const [precio, setPrecio] = useState('');
@@ -9,6 +15,7 @@ const CrearProducto = ({ onClose }) => {
   const [imagen, setImagen] = useState('');
 
   const handleSubmit = async (e) => {
+
     e.preventDefault();
     const nuevoProducto = {
       nombre,
@@ -17,8 +24,43 @@ const CrearProducto = ({ onClose }) => {
       stock,
       imagen
     };
+  
+    if(!token){
+      alert("¡Debe ingresar credenciales registradas para poder cargar un producto!")
+    }
+    if(token){
+      try {  
+        const response = await fetch('http://localhost:3000/verificacion', {
+        method: 'POST',
+        headers: { Authorization: `Bearer ${token}` }});
+  
+        if (response.ok) {
+          console.log("respuesta: ", response.ok);
+          try{
+            const resp = await fetch('http://localhost:3000/api/productos', {
+              method: 'POST',
+              headers: {
+                'Content-Type': 'application/json',
+              },
+              body: JSON.stringify({ nuevoProducto })});
+              console.log("Finalmente: ", resp)
+              if(resp.ok)
+                alert("¡Producto registrado con éxito!")
+              else
+                alert("¡Error al registar producto!")
+            
+          }catch (error){
+            console.error('Error:', error);
+          }
+
+        }
+      }catch (error){
+        console.error('Error:', error);
+      }
+    }
     onClose();
-  };
+  }
+    
 
   return (
     <Container className="mt-3">

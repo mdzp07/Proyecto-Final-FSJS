@@ -3,7 +3,7 @@ import cors from 'cors';
 import dotenv from 'dotenv';
 import {
     getProductos, getProductoById, createProducto, updateProducto, deleteProducto,
-    getUsuarios, getUsuarioById, createUsuario, updateUsuario, deleteUsuario, autenticarUsuario,
+    getUsuarios, getUsuarioById, createUsuario, updateUsuario, deleteUsuario, verificarYdecodificar, autenticarUsuario,
 
 } from './consultas.js';
 
@@ -44,12 +44,30 @@ app.get('/api/productos/:id', async (req, res) => {
 app.post('/api/productos', async (req, res) => {
     try {
         const { nombre, descripcion, precio, imagen, stock } = req.body;
+        console.log(req.body);
         const newProducto = await createProducto(nombre, descripcion, precio, imagen, stock);
         res.json(newProducto);
     } catch (err) {
         res.status(500).send(err.message);
     }
 });
+
+app.post('/verificacion', async (req, res) => {
+    console.log("Hola GETT")
+    try {
+        const Authorization = req.header("Authorization"); 
+        const token = Authorization.split("Bearer ")[1];
+        console.log("aqui lo que llego a server como token1: ", token)
+        const answer = await verificarYdecodificar (token);
+        if(!answer){
+            res.send("No se ha podido verificar.");
+          }else{
+            res.send(true);
+            console.log("Enviado.")
+          }
+        }catch (err) {
+        res.status(500).send(err.message);}
+     });
 
 app.put('/api/productos/:id', async (req, res) => {
     try {

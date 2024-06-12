@@ -4,7 +4,6 @@ import { Context } from '../context/Context';
 const Cards = () => {
 
     const { car, setCar } = useContext(Context);
-
     const [data, setData] = useState([]);
 
     const fetchData = async () => {

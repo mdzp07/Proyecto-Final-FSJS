@@ -9,13 +9,15 @@ import Perfil from './views/Perfil';
 import Compra from './views/Compra';
 import Administrador from './components/AdminComponents/Administrador';
 import { StoreProvider } from './context/ContextAdm';
-import ContextProvider from './context/Context';
+import {ContextProvider} from './context/Context';
+import {TokenProvider} from './context/ContextToken';
 
 
 function App() {
   return (
     <StoreProvider>
           <ContextProvider>
+          <TokenProvider>
 
       <div className='App'>
         <Routes>
@@ -29,8 +31,8 @@ function App() {
         </Routes>
       </div>
 
+      </TokenProvider>
       </ContextProvider>
-
     </StoreProvider>
   );
 }

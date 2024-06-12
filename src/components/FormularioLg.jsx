@@ -1,7 +1,9 @@
-import React, { useState } from 'react';
-import 'bootstrap/dist/css/bootstrap.min.css';
+import React, { useState, useContext } from 'react';
+import {TokenContext} from '../context/ContextToken';
 
 const FormularioLg = () => {
+
+  const { token, setToken } = useContext(TokenContext);
   
   const [correo, setCorreo] = useState('');
   const [contrasena, setContrasena] = useState('');
@@ -10,7 +12,7 @@ const FormularioLg = () => {
     e.preventDefault();
     try {
       console.log(correo, contrasena);  
-      const response = await fetch('http://localhost:3001/autenticar', {
+      const response = await fetch('http://localhost:3000/autenticar', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
@@ -19,6 +21,7 @@ const FormularioLg = () => {
 
       if (response.ok) {
         const data = await response.json();
+        setToken(data);
         console.log('Usuario registrado:', data);
         if(data){
             alert("¡Usuario autenticado exitosamente!")

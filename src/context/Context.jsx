@@ -6,9 +6,10 @@ export const Context = createContext();
 export const ContextProvider = ({children}) => {
 
     const [car, setCar] = useState([]);
+    const [token, setToken] = useState([]);
 
   return (
-    <Context.Provider value={{ car, setCar }}>
+    <Context.Provider value={{ car, setCar, token, setToken }}>
         {children}
     </Context.Provider>
   );
