@@ -6,7 +6,6 @@ const CrearProducto = ({ onClose }) => {
 
   const { token } = useContext(TokenContext);
 
-  console.log("toquen en crear producto: ", token);
 
   const [nombre, setNombre] = useState('');
   const [descripcion, setDescripcion] = useState('');
@@ -17,13 +16,6 @@ const CrearProducto = ({ onClose }) => {
   const handleSubmit = async (e) => {
 
     e.preventDefault();
-    const nuevoProducto = {
-      nombre,
-      descripcion,
-      precio,
-      stock,
-      imagen
-    };
   
     if(!token){
       alert("¡Debe ingresar credenciales registradas para poder cargar un producto!")
@@ -35,15 +27,17 @@ const CrearProducto = ({ onClose }) => {
         headers: { Authorization: `Bearer ${token}` }});
   
         if (response.ok) {
-          console.log("respuesta: ", response.ok);
           try{
             const resp = await fetch('http://localhost:3000/api/productos', {
               method: 'POST',
               headers: {
                 'Content-Type': 'application/json',
               },
-              body: JSON.stringify({ nuevoProducto })});
-              console.log("Finalmente: ", resp)
+              body: JSON.stringify({ nombre,
+                descripcion,
+                precio,
+                stock,
+                imagen})});
               if(resp.ok)
                 alert("¡Producto registrado con éxito!")
               else

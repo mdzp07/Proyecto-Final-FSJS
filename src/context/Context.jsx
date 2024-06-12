@@ -9,7 +9,7 @@ export const ContextProvider = ({children}) => {
     const [likes, setLikes] = useState([]);
 
   return (
-    <Context.Provider value={{ car, setCar, likes, setLikes, token, setToken }}>
+    <Context.Provider value={{ car, setCar, likes, setLikes}}>
         {children}
     </Context.Provider>
   );

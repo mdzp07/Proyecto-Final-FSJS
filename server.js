@@ -53,11 +53,9 @@ app.post('/api/productos', async (req, res) => {
 });
 
 app.post('/verificacion', async (req, res) => {
-    console.log("Hola GETT")
     try {
         const Authorization = req.header("Authorization"); 
         const token = Authorization.split("Bearer ")[1];
-        console.log("aqui lo que llego a server como token1: ", token)
         const answer = await verificarYdecodificar (token);
         if(!answer){
             res.send("No se ha podido verificar.");
@@ -109,6 +107,20 @@ app.get('/api/usuarios/:id', async (req, res) => {
     }
 });
 
+
+
+///////////////////////////////////////////////////////7
+// Middleware para verificar credenciales
+// const verificarCredenciales = (req, res, next) => {
+//     const { email, password } = req.body;
+//     if (!email || !password) {
+//       return res.status(400).json({ error: 'Correo electrónico y contraseña son obligatorios' });
+//     }
+//     console.log("Next sin problemas.")
+//     next();
+//   };
+
+
 app.post('/autenticar', async (req, res) => {
     try {
         const {correo, clave} = req.body;
@@ -119,6 +131,8 @@ app.post('/autenticar', async (req, res) => {
         res.status(500).send(err.message);
     }
 });
+/////////////////////////////////////////////////////
+
 
 app.post('/api/usuarios', async (req, res) => {
     try {

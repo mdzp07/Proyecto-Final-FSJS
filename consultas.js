@@ -17,13 +17,10 @@ const pool = new Pool({
 // Autenticación de usuario
 const autenticarUsuario = async (email, password) => {
     try {
-        console.log("pasó1: ", email, password);
         const consulta = "SELECT * FROM usuario WHERE correo = $1";
         const values = [email];
-        console.log('Consulta:', consulta, 'Values:', values);
         
         const result = await pool.query(consulta, values);
-        console.log('Resultado de la consulta:', result.rows[0].clave);
 
         if (result.rowCount === 0) {
             console.log('No se encontró el usuario con ese correo.');
@@ -32,10 +29,8 @@ const autenticarUsuario = async (email, password) => {
 
         const passwordEncriptada = result.rows[0].clave;
         const passwordEsCorrecta = bcrypt.compareSync(password, passwordEncriptada);
-        console.log(passwordEsCorrecta);
 
         if (!passwordEsCorrecta) {
-            console.log('Contraseña incorrecta.');
             return false;
         }
 
@@ -49,14 +44,11 @@ const autenticarUsuario = async (email, password) => {
 
 // Validar el token recibido en las cabeceras en la ruta
 const verificarYdecodificar = async (token) => {
-    console.log("Aqui el token en verificar: ", token)
     jwt.verify(token, "az_AZ");
     const {email} = jwt.decode(token);
-    console.log("Aqui lo que decodifica: ", email)
     const consulta = "SELECT * FROM usuario WHERE correo = $1";
     const values = [email];
     const {rows, rowCount} = await pool.query(consulta, values);
-    console.log("Aqui lo que seria en rows: ", rows)
     return(rows)
   }
 
@@ -110,7 +102,6 @@ const getUsuarioById = async (id) => {
 
 const createUsuario = async (nombre, correo, password, rol = 'usuario') => {
     const passwordEncriptada = bcrypt.hashSync(password);
-    console.log("hola:", nombre, correo, passwordEncriptada, rol);
     const consulta = "INSERT INTO usuario (nombre, correo, clave, rol) VALUES ($1, $2, $3, $4) RETURNING *";
     const values = [nombre, correo, passwordEncriptada, rol];
     const { rows } = await pool.query(consulta, values);
