@@ -1,6 +1,7 @@
 // Cards.js
 import React, { useEffect, useState, useContext } from 'react';
 import { Context } from '../context/Context';
+import { Box, Button, Container, Typography } from '@mui/material';
 
 const Cards = () => {
     const { car, setCar, likes, setLikes } = useContext(Context);
@@ -38,26 +39,31 @@ const Cards = () => {
 
     return (
         <div className="container">
-            <h1 className='product-title'>Productos</h1>
+            <Typography 
+            variant="h1" 
+            component="h2"
+            textAlign="center"
+            margin="10px">Productos</Typography>
             <div className="row">
                 {data.map((item, index) => (
-                    <div key={index} className="col-md-3 d-flex align-items-stretch g-3">
+                    <div  key={index} className="col-md-3 d-flex align-items-stretch g-3">
                         <div className="card mb-3 h-100">
                             <img src={item.imagen} className="card-img-top" alt={item.descripcion} />
                             <div className="card-body">
                                 <h5 className="card-title">{item.nombre.length > 50 ? item.nombre.substring(0, 50) + '...' : item.nombre}</h5>
                                 <p className="card-text">{item.descripcion.length > 50 ? item.descripcion.substring(0, 50) + '...' : item.descripcion}</p>
                                 <p className='card-text'>$ {item.precio}</p>
-                                <div className=''>
-                                    <button className={`cajaBoton ${likes.includes(index) ? 'liked' : ''}`} onClick={() => handleLikeClick(index)}>
+                                <Box display="flex" flexDirection="column" gap="5px"  className=''>
+                                    <Button  variant='outlined' color='secondary'  className={`cajaBoton ${likes.includes(index) ? 'liked' : ''}`} onClick={() => handleLikeClick(index)}>
                                         <i className={`bi bi-heart${likes.includes(index) ? '-fill' : ''} carro`} style={{ color: 'red' }}></i>
-                                        <span className='add'>{likes.includes(index) ? 'Quitar de Favoritos' : 'Añadir a Favoritos'}</span>
-                                    </button>
-                                    <button className='cajaBoton' onClick={() => add(item, index)}>
+                                        <span className='add'>{likes.includes(index) ? ' Quitar de Favoritos' : ' Añadir a Favoritos'}</span>
+                                    </Button>
+                                    <Button variant='outlined' color='primary'  className='cajaBoton' onClick={() => add(item, index)}>
                                         <i className="bi bi-cart carro"></i>
-                                        <span className='add'>Añadir al carrito</span>
-                                    </button>
-                                </div>
+                                        <span className='add'> Añadir al carrito</span>
+                                    </Button>
+                                    
+                                </Box>
                             </div>
                         </div>
                     </div>
