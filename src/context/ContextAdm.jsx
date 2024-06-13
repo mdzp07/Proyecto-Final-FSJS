@@ -9,11 +9,19 @@ export const StoreProvider = ({ children }) => {
     useEffect(() => {
         fetch('http://localhost:3000/api/productos')
             .then(response => response.json())
-            .then(data => setProductos(data));
+            .then(data => {
+                console.log('Productos obtenidos:', data); // Log para verificar los datos
+                setProductos(data);
+            })
+            .catch(error => console.error('Error al obtener productos:', error));
 
         fetch('http://localhost:3000/api/usuarios')
             .then(response => response.json())
-            .then(data => setUsuarios(data));
+            .then(data => {
+                console.log('Usuarios obtenidos:', data); // Log para verificar los datos
+                setUsuarios(data);
+            })
+            .catch(error => console.error('Error al obtener usuarios:', error));
     }, []);
 
     return (

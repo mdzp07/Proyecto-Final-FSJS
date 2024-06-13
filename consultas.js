@@ -85,8 +85,15 @@ const updateProducto = async (id, nombre, descripcion, precio, imagen, stock) =>
 }
 
 const deleteProducto = async (id) => {
-    await pool.query("DELETE FROM producto WHERE id_producto = $1", [id]);
-}
+    try {
+        const result = await pool.query("DELETE FROM producto WHERE id_producto = $1", [id]);
+        return result;
+    } catch (error) {
+        console.error('Error al eliminar producto:', error);
+        throw error;
+    }
+};
+
 
 // Consultas para los usuarios
 const getUsuarios = async () => {

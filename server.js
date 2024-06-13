@@ -69,25 +69,36 @@ app.post('/verificacion', async (req, res) => {
         res.status(500).send(err.message);}
      });
 
-app.put('/api/productos/:id', async (req, res) => {
-    try {
-        const { nombre, descripcion, precio, imagen, stock } = req.body;
-        const updatedProducto = await updateProducto(req.params.id, nombre, descripcion, precio, imagen, stock);
-        res.json(updatedProducto);
-    } catch (err) {
-        res.status(500).send(err.message);
-    }
-});
+     app.delete('/api/productos/:id', async (req, res) => {
+        try {
+            const result = await deleteProducto(req.params.id);
+            if (result.affectedRows === 0) {
+                // Si no se eliminó ninguna fila, es posible que el producto no exista
+                res.status(404).send('Producto no encontrado');
+            } else {
+                res.status(204).send();
+            }
+        } catch (err) {
+            console.error('Error al eliminar producto:', err);
+            res.status(500).send(err.message);
+        }
+    });
 
-app.delete('/api/productos/:id', async (req, res) => {
-    try {
-        await deleteProducto(req.params.id);
-        res.status(204).send();
-    } catch (err) {
-        res.status(500).send(err.message);
-    }
-});
-
+    app.delete('/api/productos/:id_producto', async (req, res) => {
+        try {
+          const result = await deleteProducto(req.params.id_producto);
+          if (result.affectedRows === 0) {
+            // Si no se eliminó ninguna fila, es posible que el producto no exista
+            res.status(404).send('Producto no encontrado');
+          } else {
+            res.status(204).send();
+          }
+        } catch (err) {
+          console.error('Error al eliminar producto:', err);
+          res.status(500).send(err.message);
+        }
+      });
+      
 // Rutas para usuarios
 
 
