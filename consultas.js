@@ -1,8 +1,7 @@
-import pkg from 'pg';
-const { Pool } = pkg;
-import { config } from 'dotenv';
-import bcrypt from 'bcryptjs';
-import jwt from 'jsonwebtoken';
+const { Pool } = require('pg');
+const { config } = require('dotenv');
+const bcrypt = require('bcryptjs');
+const jwt = require('jsonwebtoken');
 
 config();
 
@@ -119,7 +118,7 @@ const deleteUsuario = async (id) => {
     await pool.query("DELETE FROM usuario WHERE id_usuario = $1", [id]);
 }
 
-export {
+module.exports = {
     autenticarUsuario,
     getProductos,
     getProductoById,

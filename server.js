@@ -1,18 +1,20 @@
-import express from 'express';
-import cors from 'cors';
-import dotenv from 'dotenv';
-import {
+const express = require('express');
+const cors = require('cors');
+const dotenv = require('dotenv');
+const {
     getProductos, getProductoById, createProducto, updateProducto, deleteProducto,
     getUsuarios, getUsuarioById, createUsuario, updateUsuario, deleteUsuario, verificarYdecodificar, autenticarUsuario,
-
-} from './consultas.js';
+} = require('./consultas.js');
 
 dotenv.config();
 
 const app = express();
 
-app.listen(3000, () => {
-    console.log(`Servidor encendido en puerto 3000`);
+const PORT = process.env.PORT || 3000;
+
+
+app.listen(PORT, () => {
+    console.log(`Servidor encendido en puerto ${PORT}`);
 });
 
 app.use(cors());
@@ -166,4 +168,4 @@ app.delete('/api/usuarios/:id', async (req, res) => {
     }
 });
 
-export default app;
+module.exports = app;

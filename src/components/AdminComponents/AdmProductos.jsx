@@ -1,7 +1,6 @@
 import React, { useContext, useState } from 'react';
 import { Table, Button, Container, Row, Col, Card } from 'react-bootstrap';
 import { StoreContext } from '../../context/ContextAdm';
-import DetallesProducto from './DetallesProducto';
 import CrearProducto from './CrearProducto';
 import ModificarProducto from './ModificarProducto';
 
@@ -11,8 +10,14 @@ const AdmProductos = () => {
   const [modoEditar, setModoEditar] = useState(false);
   const [mostrarCrearProducto, setMostrarCrearProducto] = useState(false);
 
-  const handleEliminar = (id) => {
-    setProductos(productos.filter(producto => producto.id !== id));
+  const handleEliminar = async (id) => {
+    try {
+      await fetch(`/api/productos/${id}`, { method: 'DELETE' });
+      setProductos(productos.filter(producto => producto.id !== id));
+    } catch (error) {
+      console.error('Error al eliminar producto:', error);
+      // Manejar errores específicos si es necesario
+    }
   };
 
   const handleModificar = (producto) => {
