@@ -73,7 +73,6 @@ app.post('/verificacion', async (req, res) => {
         try {
             const result = await deleteProducto(req.params.id);
             if (result.affectedRows === 0) {
-                // Si no se eliminó ninguna fila, es posible que el producto no exista
                 res.status(404).send('Producto no encontrado');
             } else {
                 res.status(204).send();
@@ -88,7 +87,6 @@ app.post('/verificacion', async (req, res) => {
         try {
           const result = await deleteProducto(req.params.id_producto);
           if (result.affectedRows === 0) {
-            // Si no se eliminó ninguna fila, es posible que el producto no exista
             res.status(404).send('Producto no encontrado');
           } else {
             res.status(204).send();

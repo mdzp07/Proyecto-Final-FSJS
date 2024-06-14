@@ -1,11 +1,13 @@
 import React, { useState, useContext } from 'react';
 import { Form, Button, Container } from 'react-bootstrap';
 import { TokenContext } from '../../context/ContextToken';
+import { StoreContext } from '../../context/ContextAdm';
+
 
 const CrearProducto = ({ onClose }) => {
 
   const { token } = useContext(TokenContext);
-
+  const { setProductos } = useContext(StoreContext);
 
   const [nombre, setNombre] = useState('');
   const [descripcion, setDescripcion] = useState('');
@@ -38,12 +40,16 @@ const CrearProducto = ({ onClose }) => {
                 precio,
                 stock,
                 imagen})});
-              if(resp.ok)
-                alert("¡Producto registrado con éxito!")
+
+              if (resp.ok) {
+                  const nuevoProducto = await resp.json();
+                  setProductos((prevProductos) => [...prevProductos, nuevoProducto]);
+                  alert("¡Producto registrado con éxito!");
+                  }
               else
                 alert("¡Error al registar producto!")
             
-          }catch (error){
+             }catch (error){
             console.error('Error:', error);
           }
 

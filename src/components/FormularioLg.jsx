@@ -25,6 +25,8 @@ const FormularioLg = () => {
         console.log('Usuario registrado:', data);
         if(data){
             alert("¡Usuario autenticado exitosamente!")
+            setCorreo('');
+            setContrasena('');
         }else{
             alert("¡Credenciales invalidas!") 
         }
@@ -40,7 +42,8 @@ const FormularioLg = () => {
     return (
       <div className="container contenedor-registro">
         <form className='contenedor-formulario' onSubmit={handleSubmit}>
-        <h1>FormularioLG</h1>
+        <h1>Inicia sesión</h1>
+        <br />
         <div className="mb-3">
           <label htmlFor="correo" className="form-label">Correo</label>
           <input type="email" className="form-control" id="correo" value={correo} onChange={(e) => setCorreo(e.target.value)} placeholder="Correo" />

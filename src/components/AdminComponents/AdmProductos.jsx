@@ -51,7 +51,7 @@ const AdmProductos = () => {
     handleCerrarFormulario(); // Cerrar el formulario después de agregar el producto
   };
 
-  console.log('Productos actuales:', productos); // Log para ver los productos actuales
+  console.log('Productos actuales:', productos); 
 
   return (
     <Container fluid>
@@ -67,7 +67,6 @@ const AdmProductos = () => {
           <Col md={{ span: 10, offset: 1 }}>
             <Card className="mt-4">
               <Card.Body>
-                {/* Pasar la función agregarProductoNuevo como prop a CrearProducto */}
                 <CrearProducto onClose={handleCerrarFormulario} agregarProductoNuevo={agregarProductoNuevo} />
               </Card.Body>
             </Card>

@@ -20,6 +20,9 @@ const Formulario = () => {
         const data = await response.json();
         console.log('Usuario registrado:', data);
         alert("¡Usuario guardado exitosamente!")
+        setNombre('');
+        setCorreo('');
+        setContrasena('');
       } else {
         console.error('Error al registrar usuario');
       }

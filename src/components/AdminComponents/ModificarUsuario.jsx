@@ -5,8 +5,6 @@ const ModificarUsuario = ({ usuario, setModoEditar }) => {
   const { usuarios, setUsuarios } = useContext(StoreContext);
   const [nombre, setNombre] = useState(usuario.nombre);
   const [correo, setCorreo] = useState(usuario.correo);
-  const [direccion, setDireccion] = useState(usuario.direccion);
-  const [telefono, setTelefono] = useState(usuario.telefono);
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -41,14 +39,6 @@ const ModificarUsuario = ({ usuario, setModoEditar }) => {
         <div>
           <label>Correo Electrónico:</label>
           <input type="email" value={correo} onChange={(e) => setCorreo(e.target.value)} required />
-        </div>
-        <div>
-          <label>Dirección:</label>
-          <input type="text" value={direccion} onChange={(e) => setDireccion(e.target.value)} required />
-        </div>
-        <div>
-          <label>Teléfono:</label>
-          <input type="text" value={telefono} onChange={(e) => setTelefono(e.target.value)} required />
         </div>
         <button type="submit">Modificar Usuario</button>
       </form>

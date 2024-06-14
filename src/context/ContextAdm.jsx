@@ -10,7 +10,7 @@ export const StoreProvider = ({ children }) => {
         fetch('http://localhost:3000/api/productos')
             .then(response => response.json())
             .then(data => {
-                console.log('Productos obtenidos:', data); // Log para verificar los datos
+                console.log('Productos obtenidos:', data);
                 setProductos(data);
             })
             .catch(error => console.error('Error al obtener productos:', error));
@@ -18,7 +18,7 @@ export const StoreProvider = ({ children }) => {
         fetch('http://localhost:3000/api/usuarios')
             .then(response => response.json())
             .then(data => {
-                console.log('Usuarios obtenidos:', data); // Log para verificar los datos
+                console.log('Usuarios obtenidos:', data);
                 setUsuarios(data);
             })
             .catch(error => console.error('Error al obtener usuarios:', error));
