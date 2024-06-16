@@ -17,7 +17,13 @@ app.listen(PORT, () => {
     console.log(`Servidor encendido en puerto ${PORT}`);
 });
 
-app.use(cors({ origin: '*' }));
+const corsConfig = {
+    origin: 'https://proyectofinaladl.netlify.app',
+    optionsSuccessStatus: 200
+  };
+  
+  app.use(cors(corsConfig));
+
 app.use(express.json());
 
 app.get('/', (req, res) => {

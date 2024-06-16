@@ -12,7 +12,7 @@ const Usuarios = () => {
   useEffect(() => {
     const fetchUsuarios = async () => {
       try {
-        const response = await fetch('http://localhost:3000/api/usuarios');
+        const response = await fetch('https://proyecto-final-fsjs.onrender.com/api/usuarios');
         const data = await response.json();
         setUsuarios(data);
       } catch (error) {
@@ -25,7 +25,7 @@ const Usuarios = () => {
 
   const handleEliminar = async (id_usuario) => {
     try {
-      await fetch(`http://localhost:3000/api/usuarios/${id_usuario}`, {
+      await fetch(`https://proyecto-final-fsjs.onrender.com/api/usuarios/${id_usuario}`, {
         method: 'DELETE',
       });
       setUsuarios(usuarios.filter(usuario => usuario.id_usuario !== id_usuario));

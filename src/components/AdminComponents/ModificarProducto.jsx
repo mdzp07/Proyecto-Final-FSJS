@@ -19,7 +19,7 @@ const ModificarProducto = ({ producto, setModoEditar, onClose }) => {
       imagen
     };
     // Lógica para enviar el producto actualizado al backend
-    setModoEditar(false); // Cerrar el formulario al enviar el producto actualizado
+    setModoEditar(false);
     onClose(); // Cerrar el formulario al enviar el producto actualizado
   };
 

@@ -13,7 +13,7 @@ const AdmProductos = () => {
   const handleEliminar = async (id_producto) => {
     if (id_producto) {
       try {
-        const response = await fetch(`http://localhost:3000/api/productos/${id_producto}`, { method: 'DELETE' });
+        const response = await fetch(`https://proyecto-final-fsjs.onrender.com/api/productos/${id_producto}`, { method: 'DELETE' });
         if (response.ok) {
           setProductos((prevProductos) => prevProductos.filter(producto => producto.id_producto !== id_producto));
         } else {

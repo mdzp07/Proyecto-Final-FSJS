@@ -24,13 +24,13 @@ const CrearProducto = ({ onClose }) => {
     }
     if(token){
       try {  
-        const response = await fetch('http://localhost:3000/verificacion', {
-        method: 'POST',
+        const response = await fetch('https://proyecto-final-fsjs.onrender.com/verificacion', {
+          method: 'POST',
         headers: { Authorization: `Bearer ${token}` }});
   
         if (response.ok) {
           try{
-            const resp = await fetch('http://localhost:3000/api/productos', {
+            const resp = await fetch('https://proyecto-final-fsjs.onrender.com/api/productos', {
               method: 'POST',
               headers: {
                 'Content-Type': 'application/json',

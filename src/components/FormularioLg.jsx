@@ -12,7 +12,7 @@ const FormularioLg = () => {
     e.preventDefault();
     try {
       console.log(correo, contrasena);  
-      const response = await fetch('http://localhost:3000/autenticar', {
+      const response = await fetch('https://proyecto-final-fsjs.onrender.com/autenticar', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',

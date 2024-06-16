@@ -16,7 +16,7 @@ const ModificarUsuario = ({ usuario, setModoEditar }) => {
       telefono
     };
 
-    await fetch(`http://localhost:3000/api/usuarios/${usuario.id_usuario}`, {
+    await fetch(`https://proyecto-final-fsjs.onrender.com/api/usuarios/${usuario.id_usuario}`, {
       method: 'PUT',
       headers: {
         'Content-Type': 'application/json',

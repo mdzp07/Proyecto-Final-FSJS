@@ -11,7 +11,7 @@ const DatosPerfil = () => {
     // Función para cargar los datos de las tarjetas favoritas desde la API
     const fetchFavoriteCards = async () => {
         try {
-            const response = await fetch('http://localhost:3000/api/productos');
+            const response = await fetch('https://proyecto-final-fsjs.onrender.com/api/productos');
             const jsonData = await response.json();
             const favoriteCardsData = likes.map(index => jsonData[index]);
             setFavoriteCards(favoriteCardsData);
@@ -23,7 +23,7 @@ const DatosPerfil = () => {
     // Función para cargar los datos del usuario desde la API
     const fetchUserData = async () => {
         try {
-            const response = await fetch('http://localhost:3000/api/usuarios');
+            const response = await fetch('https://proyecto-final-fsjs.onrender.com/api/usuarios');
             const jsonData = await response.json();
             if (jsonData.length > 0) {
                 setUserData(jsonData[0]); // Selecciona el primer usuario
