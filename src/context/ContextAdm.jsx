@@ -7,7 +7,7 @@ export const StoreProvider = ({ children }) => {
     const [usuarios, setUsuarios] = useState([]);
 
     useEffect(() => {
-        fetch('http://localhost:3000/api/productos')
+        fetch('https://proyecto-final-fsjs.onrender.com/api/productos')
             .then(response => response.json())
             .then(data => {
                 console.log('Productos obtenidos:', data);
@@ -15,7 +15,7 @@ export const StoreProvider = ({ children }) => {
             })
             .catch(error => console.error('Error al obtener productos:', error));
 
-        fetch('http://localhost:3000/api/usuarios')
+        fetch('https://proyecto-final-fsjs.onrender.com/api/usuarios')
             .then(response => response.json())
             .then(data => {
                 console.log('Usuarios obtenidos:', data);
